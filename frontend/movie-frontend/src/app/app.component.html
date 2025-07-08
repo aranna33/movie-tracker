@@ -1,0 +1,30 @@
+<div class="container">
+  <h1>🎬 Movie Tracker</h1>
+
+  <form (ngSubmit)="addMovie()" class="movie-form">
+    <input
+      [(ngModel)]="newMovie.title"
+      name="title"
+      placeholder="Movie Title"
+      required
+    />
+    <input
+      [(ngModel)]="newMovie.director"
+      name="director"
+      placeholder="Director"
+      required
+    />
+    <button type="submit" [disabled]="loading">Add Movie</button>
+  </form>
+
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <h2>Movie List</h2>
+  <div *ngIf="loading && movies.length === 0">Loading...</div>
+  <ul>
+    <li *ngFor="let movie of movies">
+      <b>{{ movie.title }}</b> by {{ movie.director }}
+    </li>
+  </ul>
+  <div *ngIf="movies.length === 0 && !loading">No movies added yet.</div>
+</div>

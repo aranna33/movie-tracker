@@ -1,0 +1,54 @@
+.container {
+  max-width: 600px;
+  margin: 32px auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+h1,
+h2 {
+  text-align: center;
+}
+.movie-form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+  }
+  button {
+    padding: 8px 16px;
+    background: #2684ff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+    &:hover {
+      background: #185abc;
+    }
+    &:disabled {
+      background: #bbb;
+      cursor: not-allowed;
+    }
+  }
+}
+.error {
+  color: #e74c3c;
+  text-align: center;
+  margin-bottom: 16px;
+}
+ul {
+  padding: 0;
+  list-style: none;
+  li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 1.1em;
+  }
+}
