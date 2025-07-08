@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15
+    container_name: postgres-movies
+    environment:
+      POSTGRES_DB: moviesdb
+      POSTGRES_USER: movieuser
+      POSTGRES_PASSWORD: password123
+    # ports:
+    #   - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    image: movie-backend:latest
+    container_name: movie-backend
+    build:
+      context: ./backend
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: moviesdb
+      DB_USER: movieuser
+      DB_PASSWORD: password123
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  frontend:
+    image: movie-frontend:latest
+    container_name: movie-frontend
+    build:
+      context: ./frontend/movie-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

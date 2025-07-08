@@ -1,0 +1,14 @@
+# Python
+backend/__pycache__/
+backend/*.pyc
+backend/.venv/
+backend/venv/
+# Node
+frontend/**/node_modules/
+frontend/**/dist/
+# VSCode, OS, Python cache
+.vscode/
+.DS_Store
+__pycache__/
+*.pyc
+
