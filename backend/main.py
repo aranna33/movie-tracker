@@ -4,7 +4,28 @@ from pydantic import BaseModel
 import os
 import psycopg2
 
+def init_db():
+    conn = psycopg2.connect(
+        host=os.getenv("DB_HOST", "localhost"),
+        port=int(os.getenv("DB_PORT", "5432")),
+        database=os.getenv("DB_NAME", "moviesdb"),
+        user=os.getenv("DB_USER", "movieuser"),
+        password=os.getenv("DB_PASSWORD", "password123")
+    )
+    cur = conn.cursor()
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS movies (
+            id SERIAL PRIMARY KEY,
+            title VARCHAR(255),
+            director VARCHAR(255)
+        );
+    """)
+    conn.commit()
+    cur.close()
+    conn.close()
+
 app = FastAPI()
+init_db()
 
 app.add_middleware(
     CORSMiddleware,

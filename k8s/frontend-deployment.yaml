@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: frontend
+spec:
+ replicas: 1
+ selector:
+  matchLabels:
+   app: frontend
+ template:
+  metadata:
+   labels:
+    app: frontend
+  spec:
+   containers:
+    - name: frontend
+      image: movie-frontend:latest
+      imagePullPolicy: Never # for local images on Minikube
+      env:
+       - name: API_URL
+         value: "http://backend:8000" # Or whatever your backend service URL is **inside the cluster**
+      ports:
+       - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: frontend
+spec:
+ type: NodePort # (Or LoadBalancer for cloud)
+ selector:
+  app: frontend
+ ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30080 # Choose a free port above 30000 for Minikube

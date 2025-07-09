@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../environments/environment';
 
 export interface Movie {
   id?: number;
   title: string;
   director: string;
 }
+const apiUrl = (window as any)['env']?.apiUrl || 'http://localhost:8000';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MovieService {
-  // Make sure this points to your backend!
-  private baseUrl = environment.apiUrl;
+  private baseUrl = apiUrl;
 
   constructor(private http: HttpClient) {}
 
